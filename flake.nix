@@ -20,11 +20,14 @@
   # This is the standard format for flake.nix. `inputs` are the dependencies of the flake,
   # Each item in `inputs` will be passed as a parameter to the `outputs` function after being pulled and built.
   inputs = {
-    # nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-24.05-darwin";
+    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -37,6 +40,7 @@
     self,
     nixpkgs,
     darwin,
+    home-manager,
     ...
   }: let
     username = "daze";
@@ -57,6 +61,15 @@
         ./modules/apps.nix
         ./modules/host-users.nix
         ./modules/shell.nix
+        home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.daze = import ./home.nix;
+
+            # Optionally, use home-manager.extraSpecialArgs to pass
+            # arguments to home.nix
+          }
       ];
     };
     # nix code formatter
