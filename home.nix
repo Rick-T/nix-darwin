@@ -37,11 +37,19 @@
   # Let Home Manager install and manage itself.
   programs.autojump.enable = true;
   programs.home-manager.enable = true;
-  programs.zsh.enable = true;
-  programs.zsh.oh-my-zsh.enable = true;
-  programs.zsh.oh-my-zsh.plugins = [
-    "autojump"
-    "git"
-    "sudo"
-  ];
+  programs.zsh = {
+    enable = true;
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "autojump"
+        "git"
+        "sudo"
+      ];
+    };
+  };
+
+  programs.direnv.enable = true;
+  programs.direnv.enableZshIntegration = true;
+  programs.direnv.nix-direnv.enable = true;
 }
