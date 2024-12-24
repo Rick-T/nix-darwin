@@ -41,7 +41,7 @@
   }: let
     username = "daze";
     system = "aarch64-darwin";
-    hostname = "dazebook";
+    hostname = "Dazebook";
 
     specialArgs =
       inputs
