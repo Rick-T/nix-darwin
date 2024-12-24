@@ -38,6 +38,7 @@
     ];
 
     casks = [
+      "godot"
       "google-chrome"
     ];
   };
