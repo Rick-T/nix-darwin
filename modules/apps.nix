@@ -40,6 +40,8 @@
     casks = [
       "godot"
       "google-chrome"
+      "steam"
+      "visual-studio-code"
     ];
   };
 }
